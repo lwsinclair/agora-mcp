@@ -31,11 +31,11 @@ def handle_response(response):
 
 
 @mcp.tool()
-async def search(q: str, price_min: int = 0, price_max: int = 100000,
+async def agora_search(q: str, price_min: int = 0, price_max: int = 100000,
                 count: int = 20, page: int = 1,
                 sort: str = "relevance", order: str = "desc") -> Dict:
     """
-    Search for products matching the query.
+    Search for products matching the query in Agora.
     
     Args:
         q: The search query.
@@ -62,12 +62,12 @@ async def search(q: str, price_min: int = 0, price_max: int = 100000,
 
 
 @mcp.tool()
-async def get_product_detail(slug: str) -> Dict:
+async def agora_get_product_detail(slug: str) -> Dict:
     """
-    Get details for a specific product.
+    Get details for a specific product in Agora.
     
     Args:
-        slug: The product slug.
+        slug: The product slug, it usually looks something like 'royal-blue-waxed-shoe-laces-6f2049ef-0d08-4a79-8937-025bb596092f-1718242165922'
         
     Returns:
         The product details.
@@ -76,10 +76,10 @@ async def get_product_detail(slug: str) -> Dict:
     return handle_response(response)
 
 @mcp.tool()
-async def get_payment_offers(slug: str, product_id: str , variant_id: str, shipping_address: Dict,
+async def agora_get_payment_offers(slug: str, product_id: str , variant_id: str, shipping_address: Dict,
                  user: Dict, quantity: int = 1) -> Dict:
     """
-    Get the payment offers for a product. Some products do not have variants, in such cases use the product_id as variant_id too.
+    Get the payment offers for a product in Agora. Some products do not have variants, in such cases use the product_id as variant_id too.
     Before calling this tool, check if the user has already provided the shipping address and user information. 
     Otherwise, ask the user for the shipping address and user information.
 
@@ -123,83 +123,11 @@ async def get_payment_offers(slug: str, product_id: str , variant_id: str, shipp
     )
     return handle_response(response)
 
-# @mcp.tool()
-# async def get_cart() -> Dict:
-#     """
-#     Get the current user's cart.
-    
-#     Returns:
-#         The cart details.
-#     """
-#     response = get_agora().get_cart()
-#     return handle_response(response)
-
-
-# @mcp.tool()
-# async def add_to_cart(slug: str, product_id: str, variant_id: Optional[str] = None, quantity: int = 1) -> Dict:
-#     """
-#     Add an item to the user's cart. Some products do not have variants, in such cases use the product_id as variant_id too.
-    
-#     Args:
-#         slug: The product slug.
-#         product_id: The product ID.
-#         variant_id: The product variant ID.
-#         quantity: The quantity to add.
-        
-#     Returns:
-#         The updated cart.
-#     """
-#     response = get_agora().add_to_cart(
-#         slug=slug,
-#         product_id=product_id,
-#         variant_id=variant_id,
-#         quantity=quantity
-#     )
-#     return handle_response(response)
-
-
-# @mcp.tool()
-# async def update_cart_item(slug: str, product_id: str, variant_id: str, quantity: int) -> Dict:
-#     """
-#     Update the quantity of an item in the cart. Some products do not have variants, in such cases use the product_id as variant_id too.
-    
-#     Args:
-#         slug: The product slug.
-#         product_id: The product ID.
-#         variant_id: The product variant ID.
-#         quantity: The new quantity.
-        
-#     Returns:
-#         The updated cart.
-#     """
-#     response = get_agora().update_cart_item(
-#         slug=slug,
-#         product_id=product_id,
-#         variant_id=variant_id,
-#         quantity=quantity
-#     )
-#     return handle_response(response)
-
-
-# @mcp.tool()
-# async def clear_cart() -> Dict:
-#     """
-#     Clear all items from the cart.
-    
-#     Returns:
-#         The response from the API.
-#     """
-#     response = get_agora().clear_cart()
-#     return handle_response(response)
-
-
-
-
 
 @mcp.tool()
-async def get_order(order_id: str) -> Dict:
+async def agora_get_order(order_id: str) -> Dict:
     """
-    Get details for a specific order.
+    Get details for a specific order in Agora.
     
     Args:
         order_id: The order ID.
@@ -212,7 +140,7 @@ async def get_order(order_id: str) -> Dict:
 
 
 @mcp.tool()
-async def get_user_orders() -> List[Dict]:
+async def agora_get_user_orders() -> List[Dict]:
     """
     Get all orders for the current user.
     
@@ -224,9 +152,9 @@ async def get_user_orders() -> List[Dict]:
 
 
 @mcp.tool()
-async def get_user_info() -> Dict:
+async def agora_get_user_info() -> Dict:
     """
-    Get the current user's profile and shipping addresses.
+    Get the current user's profile and shipping addresses in Agora.
     
     Returns:
         Dict containing user profile info (firstname, lastname, email) and list of shipping addresses
